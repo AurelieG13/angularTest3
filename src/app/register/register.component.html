@@ -1,0 +1,146 @@
+
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <form [formGroup]="myForm">
+        <div class="alert alert-danger" *ngIf="err">
+          <strong>{{err}}</strong>
+        </div>
+        <!--prenom-->
+        <div class="form-group">
+          <label for="firstname">prénom :</label>
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            class="form- control"
+            formControlName="firstname"
+            [(ngModel)]="formData.userDTO.firstname"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['firstname'].hasError('required') &&
+            myForm.controls['firstname'].touched
+          "
+          class="text-danger"
+        >
+          firstname est obligatoire
+        </span>
+        <!--nom-->
+        <div class="form-group">
+          <label for="lastname">nom :</label>
+          <input
+            type="text"
+            name="lastname"
+            class="form- control"
+            formControlName="lastname"
+            [(ngModel)]="formData.userDTO.lastname"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['lastname'].hasError('required') &&
+            myForm.controls['lastname'].touched
+          "
+          class="text-danger"
+        >
+          lastname est obligatoire
+        </span>
+
+        <!--Email/pseudo-->
+        <div class="form-group">
+          <label for="pseudo">Email :</label>
+          <input
+            type="text"
+            name="pseudo"
+            class="form- control"
+            formControlName="pseudo"
+            [(ngModel)]="formData.authDTO.pseudo"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['pseudo'].hasError('required') &&
+            myForm.controls['pseudo'].touched
+          "
+          class="text-danger"
+        >
+          pseudo est obligatoire
+        </span>
+        <!--password-->
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input
+            type="password"
+            name="password"
+            formControlName="password"
+            [(ngModel)]="formData.authDTO.password"
+            class="form-control"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['password'].hasError('required') &&
+            myForm.controls['password'].touched
+          "
+          class="text-danger"
+        >
+          mot de passe est obligatoire
+        </span>
+        <span
+          *ngIf="
+            myForm.controls['password'].hasError('minlength') &&
+            myForm.controls['password'].touched
+          "
+          class="text-danger"
+        >
+          mot de passe doit contenir au moins 6 caractères
+        </span>
+        <!--password confirm-->
+        <div class="form-group">
+          <label>Confirmer Mot de passe :</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['confirmPassword'].hasError('required') &&
+            myForm.controls['confirmPassword'].touched
+          "
+          class="text-danger"
+        >
+          confirmer mot de passe est obligatoire
+        </span>
+        <div>
+          <span
+            *ngIf="
+              myForm.get('confirmPassword')?.touched &&
+              myForm.get('confirmPassword')?.value !=
+                myForm.get('password')?.value
+            "
+            class="text-danger"
+          >
+            Le mot de passe confrmé ne correspond pas au mot de passe tapé
+          </span>
+        </div>
+
+        <!--button-->
+        <button
+          type="button"
+
+          class="btn btn-success"
+          (click)="sendDataToApi()"
+        >
+          S'insrire
+        </button>
+
+        <p>vous avez un compte? <a routerLink="/login">se connecter </a></p>
+      </form>
+    </div>
+  </div>
+</div>
