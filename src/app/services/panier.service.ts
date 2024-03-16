@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Sport } from '../model/sport.model';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -8,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class PanierService{
 
-  private apiURLPanier = 'http://localhost:8080/api/panier';
+/*   private apiURLPanier = 'http://localhost:8080/api/panier';
   private panierIdSubject = new BehaviorSubject<number>(0);
   panierId$ = this.panierIdSubject.asObservable();
 
@@ -35,9 +37,9 @@ export class PanierService{
 
   checkoutPanier(panierId: number): Observable<any> {
     return this.http.post(`${this.apiURLPanier}/${panierId}/checkout`, {});
-  }
+  } */
 
-  /* private apiUrlSport = 'http://localhost:8080/api/sports';
+  private apiUrlSport = 'http://localhost:8080/api/sports';
 
 
   private panier: any[] = [];
@@ -77,5 +79,5 @@ export class PanierService{
   calculerTotalPlace(): number {
     return this.panier.reduce((total, sport) => total + sport.nbSeat, 0);
   }
- */
+
 }

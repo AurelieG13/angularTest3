@@ -20,14 +20,14 @@ export class BookingComponent {
     });
   }
 
-  addToPanier(sportId: number): void {
+/*   addToPanier(sportId: number): void {
     // Appeler la méthode pour ajouter le produit au panier
     const panierId = this.panierService.getPanierId();
     this.panierService.addSportToPanier(panierId, sportId);
-  }
+  } */
 
 
-  /* addSport(sport: Sport): void {
+  addSport(sport: Sport): void {
     this.panierService.addSport(sport);
   }
 
@@ -49,6 +49,6 @@ export class BookingComponent {
 
   getTotalPlace(): number {
     return this.panierService.calculerTotalPlace();
-  } */
+  }
 
 }
