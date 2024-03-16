@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Contact</h1>
+
+  <div class="mt-3">
+    <label for="subject" class="form-label">Sujet:</label>
+    <input class="form-control" id="subject" [(ngModel)]="emailRequest.subject" placeholder="Entrez le sujet de l'email">
+  </div>
+  <div class="mt-3">
+    <label for="text" class="form-label">Corps de l'email:</label>
+    <textarea class="form-control" id="text" [(ngModel)]="emailRequest.text" placeholder="Entrez le corps de l'email"></textarea>
+  </div>
+  <button class="btn btn-success mt-3" (click)="sendEmail()">Envoyer</button>
+
+</div>
+
+
+

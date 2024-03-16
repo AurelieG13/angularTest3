@@ -1,0 +1,46 @@
+<div>
+  <table class="table table-striped table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Id</th>
+        <th>Sport</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let sport of sports; let i = index">
+      <tr>
+        <td>{{sport.id}}</td>
+        <td>{{ sport.name }}</td>
+        <td>{{ sport.description }}</td>
+        <td>{{sport.price}} €</td>
+        <td>
+          <button class="btn btn-success" (click)="addToPanier(sport.id)">Ajouter au panier</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<hr>
+
+  <div class="mt-4 mb-4">
+    <h5>Récapitulatif panier</h5>
+    <table class="table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Montant total panier</th>
+          <th>Nombre de Places</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>getTotal€</td>
+          <td>getTotalPlace</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <a type="button" class="btn btn-success" routerLink="/panier"
+    >Accéder au panier</a>

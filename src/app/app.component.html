@@ -1,6 +1,7 @@
-<h1>module principal</h1>
-<h3 routerLink="/login">login</h3>
-<h3 (click)="onLogout()">logout</h3>
-<h3 routerLink="/register">register</h3>
+<div class="container">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
 
-<router-outlet></router-outlet>
+

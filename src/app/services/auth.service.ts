@@ -9,8 +9,12 @@ import { Observable } from 'rxjs';
 export class AuthService {
   apiURLAuth: string ='http://localhost:8080/api/auth';
   apiURLUsers: string ='http://localhost:8080/api/users';
+
   token!: string;
+  public roles!: string[];
   public isloggedIn: Boolean = false;
+  public loggedUser!: string;
+
 
   constructor(
     private http: HttpClient
@@ -43,6 +47,18 @@ export class AuthService {
     localStorage.setItem('jwtToken', jwtToken);
     this.token = jwtToken;
     this.isloggedIn = true;
+  }
+
+  isAdmin():Boolean{
+    if (!this.roles){
+      return false;
+    }
+
+    return (this.roles.indexOf('ADMIN') >= 0);
+    }
+
+  getToken():string {
+    return this.token;
   }
 
 

@@ -1,0 +1,28 @@
+<div>
+  <h1 class="text-center">SPORTS</h1>
+  <form class="form-inline">
+  <div class="form-group mx-sm-3 mb-2 mt-4">
+    <label><h4>Recherche par sport</h4></label>
+    <input placeholder="Saisir ici le sport à rechercher" type="text" class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+  </div>
+</form>
+  <table class="table table-striped table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Sport</th>
+        <th>Description</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let sport of sports">
+      <tr>
+        <td>{{ sport.name }}</td>
+        <td><p>{{sport.description}}</p></td>
+        <td>{{sport.price | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button class="btn btn-info" routerLink="/booking">Réserver des places</button>
+  </div>

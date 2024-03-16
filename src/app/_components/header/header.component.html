@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+	<div class="container-fluid nav-custom dropdown-center">
+		<a class="navbar-brand " routerLink="/home">IMAGE JO</a>
+		<div class="dropdown" >
+			<a class="navbar-toggler dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<span class="navbar-text">
+					<i class="bi bi-person-circle icon-connect"></i>
+				</span>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a *ngIf="authService.isloggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
+				<li><a *ngIf="authService.isloggedIn" class="dropdown-item" routerLink="/logout">Se déconnecter</a></li>
+					<li><a *ngIf = "authService.isAdmin()" class="dropdown-item" routerLink="/admindashboard">panneau d'administration</a></li>
+				<li><a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
+				<li><a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
+			</ul>
+		</div>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="container-fluid">
+			<div class="row" >
+					<div class="col-3 my-auto" >
+						<div class="navbar-text collapse navbar-collapse text-home-custom" *ngIf="authService.isloggedIn" >
+							<span class="text-end "> Bienvenue <strong> {{ authService.loggedUser}}</strong></span>
+						</div>
+					</div>
+					<div class="col-2 dropdown navbar-text collapse navbar-collapse" *ngIf="authService.isloggedIn">
+						<a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="navbar-text">
+								<i class="bi bi-person-circle icon-connect"></i>
+							</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
+							<li><a class="dropdown-item" routerLink="/logout" (click)="authService.logout()">Se déconnecter</a></li>
+							<li><a *ngIf = "authService.isAdmin()" class="dropdown-item" routerLink="/admindashboard">Panneau d'Administration</a></li>
+						</ul>
+					</div>
+					<div class="col-2 my-auto" *ngIf="!authService.isloggedIn">
+						<a routerLink="/login" class="navbar-text collapse navbar-collapse justify-content-end">
+							<span class="icon-connect-text">Se connecter</span>
+						</a>
+					</div>
+					<div class="col-2 my-auto" *ngIf="!authService.isloggedIn">
+						<a routerLink="/register" class="navbar-text collapse navbar-collapse justify-content-end">
+							<span class="icon-connect-text">S'inscrire</span>
+						</a>
+					</div>
+			</div>
+
+      <!--navbar collapse-->
+
+			<div class="row">
+				<div class="col">
+					<div class="d-flex flex-row p-2">
+						<div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav w-100 justify-content-around">
+								<li class="nav-item">
+									<a class="nav-link btn-menu-custom text-center fs-3" aria-current="page" routerLink="/home">Accueil</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn-menu-custom text-center fs-3" routerLink="/booking">Réserver</a>
+								</li>
+								<li class="nav-item ">
+									<a class="nav-link btn-menu-custom text-center fs-3" routerLink="/contact">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<div class="navbar navbar-expand-lg navbar-light bg-light container-fluid justify-content-center">
+	<a class="navbar-toggler btn btn-custom" routerLink="/booking" type="button" aria-expanded="false">
+		<span class="navbar-text">Réserver</span>
+	</a>
+</div>
