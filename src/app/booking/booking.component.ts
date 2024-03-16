@@ -11,6 +11,7 @@ import { PanierService } from '../services/panier.service';
 })
 export class BookingComponent {
   sports: Sport[] = [];
+  paniers: any[] = [];
 
   constructor(private panierService: PanierService, private sportService: SportService) {}
 
@@ -29,6 +30,8 @@ export class BookingComponent {
 
   addSport(sport: Sport): void {
     this.panierService.addSport(sport);
+    this.paniers = this.getPanier();
+
   }
 
   getPanier(): any[] {
