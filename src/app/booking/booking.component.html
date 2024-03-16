@@ -49,23 +49,30 @@
   <a type="button" class="btn btn-success" routerLink="/payment">Accéder au paiement</a>
 
 <!-- test affichage panier détaillé -->
-<div>{{getPanier()}}</div>
+<!--<ul>
+  <li *ngFor="let subtotal of subtotalArray">
+    ID: {{ subtotal.id }}, Subtotal: {{ subtotal.subtotal | currency:'EUR':'symbol':'1.2-2' }}
+  </li>
+</ul>-->
+
+
+
+
 
 <div>
-  <table class="table table-striped table-bordered">
-    <thead class="table-light">
-      <tr>
-        <th>Id</th>
-        <th>Sport</th>
-        <th>Prix</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let panier of paniers; let i = index">
-      <tr>
-        <td>{{panier.id}}</td>
-        <td>{{ panier.name }}</td>
-        <td>{{panier.price}} €</td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="table table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Id</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let subtotal of calculateSubtotals() | keyvalue">
+        <tr>
+          <td>{{subtotal.key}}</td>
+          <td>{{subtotal.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 

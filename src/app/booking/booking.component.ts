@@ -3,6 +3,7 @@ import { Sport } from '../model/sport.model';
 import { SportService } from '../services/sport.service';
 import { PanierComponent } from '../panier/panier.component';
 import { PanierService } from '../services/panier.service';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'app-booking',
@@ -19,6 +20,7 @@ export class BookingComponent {
     this.sportService.getSports().subscribe((data) => {
       this.sports = data;
     });
+    this.calculateSubtotals();
   }
 
 /*   addToPanier(sportId: number): void {
@@ -50,8 +52,23 @@ export class BookingComponent {
     return this.panierService.calculerTotal();
   }
 
+
   getTotalPlace(): number {
     return this.panierService.calculerTotalPlace();
+  }
+
+  //test detail panier
+  subtotalArray: { id: number, subtotal: number }[] = [];
+
+/*   calculateSubtotals() {
+    const subtotalMap = this.panierService.getSubtotalMap();
+    this.subtotalArray = Array.from(subtotalMap, ([id, subtotal]) => ({ id, subtotal }));
+    console.log(subtotalMap);
+    console.log(this.subtotalArray);
+  } */
+
+  calculateSubtotals() {
+    return this.panierService.calculateSubtotals();
   }
 
 }

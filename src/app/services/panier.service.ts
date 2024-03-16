@@ -56,8 +56,13 @@ export class PanierService{
 
 
   addSport(sport: Sport): void {
-    console.log("ajout ok");
+    //console.log("ajout ok");
+    /* if (this.panier.length <= 0) {
+      this.panier.push(sport);
+    } */
     this.panier.push(sport);
+    //console.log(this.getPanier());
+
   }
 
   getPanier(): any[] {
@@ -76,8 +81,36 @@ export class PanierService{
     return this.panier.reduce((total, sport) => total + sport.price, 0);
   }
 
+
   calculerTotalPlace(): number {
     return this.panier.reduce((total, sport) => total + sport.nbSeat, 0);
+  }
+
+  // test détail panier par id
+/*   getSubtotalMap(): Map<number, number> {
+    const subtotalMap = new Map<number, number>();
+
+    this.panier.forEach(item => {
+      if (subtotalMap.has(item.id)) {
+        subtotalMap.set(item.id, subtotalMap.get(item.id)! + item.price);
+      } else {
+        subtotalMap.set(item.id, item.price);
+      }
+    });
+
+    return subtotalMap;
+  } */
+
+  calculateSubtotals() {
+    const subtotals: {[key: number]: number} = {};
+    this.panier.forEach(item => {
+      if (!subtotals[item.id]) {
+        subtotals[item.id] = item.price;
+      } else {
+        subtotals[item.id] += item.price;
+      }
+    });
+    return subtotals;
   }
 
 }
