@@ -16,11 +16,14 @@
         <td>{{ sport.description }}</td>
         <td>{{sport.price}} €</td>
         <td>
-          <button class="btn btn-success" (click)="addSport(sport)">Ajouter au panier</button>
+          <button class="btn btn-success p-2" (click)="addSport(sport)">Ajouter au panier</button>
+          <button class="btn btn-danger p-2" (click)="deleteOneSport(sport.id)">Supprimer du panier</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <button class="btn btn-danger" (click)="deletePanier()">Supprimer le panier</button>
 
 <hr>
 
@@ -42,5 +45,6 @@
     </table>
   </div>
 
-    <a type="button" class="btn btn-success" routerLink="/panier"
-    >Accéder au panier</a>
+    <!--<a type="button" class="btn btn-success" routerLink="/panier">Accéder au panier</a>-->
+  <a type="button" class="btn btn-success" routerLink="/payment">Accéder au paiement</a>
+
