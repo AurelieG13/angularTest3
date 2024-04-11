@@ -1,0 +1,44 @@
+.btn-custom-solo {
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #313160;
+  background-color: #5757ae;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-duo {
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #254f64;
+  background-color: #589dc0;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-family {
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #215937;
+  background-color: #4ab876;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-danger {
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #d21010;
+  background-color: #d24949;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-payment{
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #46e349;
+  background-color: #2b962d;
+  color: white;
+  text-align: center;
+}

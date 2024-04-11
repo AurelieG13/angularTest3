@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
 	<div class="container-fluid nav-custom dropdown-center">
-		<a class="navbar-brand " routerLink="/home">IMAGE JO</a>
+		<a class="navbar-brand " routerLink="/home"><img class="logo" src="/assets/images/logo_site.png" alt="logo jo"></a>
 		<div class="dropdown" >
 			<a class="navbar-toggler dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="navbar-text">
@@ -8,11 +8,14 @@
 				</span>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a *ngIf="authService.isloggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
-				<li><a *ngIf="authService.isloggedIn" class="dropdown-item" routerLink="/logout">Se déconnecter</a></li>
-					<li><a *ngIf = "authService.isAdmin()" class="dropdown-item" routerLink="/admindashboard">panneau d'administration</a></li>
-				<li><a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
-				<li><a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
+
+				<li><a *ngIf="isLoggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
+				<li><a *ngIf="isLoggedIn" class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
+
+        <li><a *ngIf ="isLoggedIn && userRole.includes('ROLE_ADMIN')" class="dropdown-item" routerLink="/admindashboard">Panneau d'administration</a></li>
+
+        <li><a *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
+				<li><a *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
 			</ul>
 		</div>
 
@@ -21,30 +24,25 @@
 		</button>
 		<div class="container-fluid">
 			<div class="row" >
-					<div class="col-3 my-auto" >
-						<div class="navbar-text collapse navbar-collapse text-home-custom" *ngIf="authService.isloggedIn" >
-							<span class="text-end "> Bienvenue <strong> {{ authService.loggedUser}}</strong></span>
-						</div>
-					</div>
-					<div class="col-2 dropdown navbar-text collapse navbar-collapse" *ngIf="authService.isloggedIn">
+					<div class="col-2 dropdown navbar-text collapse navbar-collapse" *ngIf="isLoggedIn">
 						<a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<span class="navbar-text">
-								<i class="bi bi-person-circle icon-connect"></i>
+								<i class="bi bi-person-circle icon-connect"> Accéder à mon compte</i>
 							</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
-							<li><a class="dropdown-item" routerLink="/logout" (click)="authService.logout()">Se déconnecter</a></li>
-							<li><a *ngIf = "authService.isAdmin()" class="dropdown-item" routerLink="/admindashboard">Panneau d'Administration</a></li>
+							<li><a *ngIf="isLoggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
+							<li><a *ngIf="isLoggedIn" class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
+							<li><a *ngIf ="isLoggedIn && userRole.includes('ROLE_ADMIN')" class="dropdown-item" routerLink="/admindashboard">Panneau d'Administration</a></li>
 						</ul>
 					</div>
-					<div class="col-2 my-auto" *ngIf="!authService.isloggedIn">
-						<a routerLink="/login" class="navbar-text collapse navbar-collapse justify-content-end">
+					<div class="col-2" *ngIf="!isLoggedIn">
+						<a routerLink="/login" class="connect_custom navbar-text collapse navbar-collapse justify-content-end">
 							<span class="icon-connect-text">Se connecter</span>
 						</a>
 					</div>
-					<div class="col-2 my-auto" *ngIf="!authService.isloggedIn">
-						<a routerLink="/register" class="navbar-text collapse navbar-collapse justify-content-end">
+					<div class="col-2" *ngIf="!isLoggedIn">
+						<a routerLink="/register" class=" connect_custom navbar-text collapse navbar-collapse justify-content-end">
 							<span class="icon-connect-text">S'inscrire</span>
 						</a>
 					</div>
@@ -54,7 +52,7 @@
 
 			<div class="row">
 				<div class="col">
-					<div class="d-flex flex-row p-2">
+					<div class="d-flex flex-row p-2 pt-3">
 						<div class="collapse navbar-collapse" id="navbarNav">
 							<ul class="navbar-nav w-100 justify-content-around">
 								<li class="nav-item">
@@ -79,3 +77,5 @@
 		<span class="navbar-text">Réserver</span>
 	</a>
 </div>
+
+

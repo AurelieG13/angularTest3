@@ -10,13 +10,18 @@ export class ContactComponent {
 
   emailRequest: any = {};
 
+  messageDisplayed: boolean = false;
+
   constructor(private emailService: EmailService) { }
 
   sendEmail() {
-    this.emailService.sendEmail(this.emailRequest)
+/*     this.emailService.sendEmail(this.emailRequest)
       .subscribe(response => {
         console.log(response);
-      });
+      }); */
+      console.log("mail envoyé");
+      this.messageDisplayed = true;
+
   }
 
 }

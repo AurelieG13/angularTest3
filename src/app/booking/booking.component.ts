@@ -36,6 +36,25 @@ export class BookingComponent {
 
   }
 
+  addSolo(sport: Sport): void {
+    this.panierService.addSport(sport);
+    this.paniers = this.getPanier();
+  }
+
+  addDuo(sport: Sport): void {
+    this.panierService.addSport(sport);
+    this.panierService.addSport(sport);
+    this.paniers = this.getPanier();
+  }
+
+  addFamily(sport: Sport): void {
+    this.panierService.addSport(sport);
+    this.panierService.addSport(sport);
+    this.panierService.addSport(sport);
+    this.panierService.addSport(sport);
+    this.paniers = this.getPanier();
+  }
+
   getPanier(): any[] {
     return this.panierService.getPanier();
   }

@@ -1,0 +1,12 @@
+.payment-custom {
+  background-color: #bfe5d2;;
+}
+
+.btn-custom-payment{
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #46e349;
+  background-color: #2b962d;
+  color: white;
+  text-align: center;
+}

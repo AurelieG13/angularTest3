@@ -1,0 +1,70 @@
+<div class="container-fluid overflow-hidden">
+    <div class="row vh-100 overflow-auto">
+        <div class="col-12 col-sm-3 col-xl-2 sidebar-custom">
+          <app-sidebar></app-sidebar>
+        </div>
+        <div class="col d-flex flex-column h-sm-100">
+          <main class="row overflow-auto">
+              <div class="col pt-4">
+                <a routerLink="/userdashboard" type="button" class="btn btn-custom my-3">Retour</a>
+                <h3 class="text-center">Modification de vos informations personnelles</h3>
+                <div class="container mt-2">
+                  <div class="row justify-content-md-center">
+                    <div class="col-md-9">
+                      <form [formGroup]="myFormProfil">
+                        <div class="alert alert-danger" *ngIf="err">
+                          <strong>erreur</strong>
+                        </div>
+
+                        <!--nom-->
+                        <div class="form-group">
+                          <label for="lastname">Nom :</label>
+                          <input
+                            type="text"
+                            name="lastname"
+                            class="form-control"
+                            formControlName="lastname"
+                          />
+                        </div>
+
+                        <!--prenom-->
+                        <div class="form-group">
+                          <label for="firstname">Prénom :</label>
+                          <input
+                            type="text"
+                            id="firstname"
+                            name="firstname"
+                            class="form-control"
+                            formControlName="firstname"/>
+                        </div>
+
+                        <!--téléphone-->
+                        <div class="form-group">
+                          <label for="phone">Téléphone :</label>
+                          <input
+                            type="text"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            formControlName="phone"/>
+                        </div>
+
+                        <!--button-->
+                        <section class="text-center">
+                          <button
+
+                            type="button"
+                            class="btn btn-custom mt-3">
+                            Valider
+                          </button>
+                        </section>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

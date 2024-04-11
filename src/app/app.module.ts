@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HeaderComponent } from './_components/header/header.component';
@@ -16,6 +16,15 @@ import { SportComponent } from './sport/sport.component';
 import { PanierComponent } from './panier/panier.component';
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
+import { UserdashboardComponent } from './userdashboard/userdashboard.component';
+import { EditprofiluserComponent } from './editprofiluser/editprofiluser.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { tokenInterceptor } from './services/token.interceptor';
+
+export function tokenGetter() {
+  return localStorage.getItem('jwtToken');
+}
 
 @NgModule({
   declarations: [
@@ -30,16 +39,28 @@ import { PaymentComponent } from './payment/payment.component';
     SportComponent,
     PanierComponent,
     BookingComponent,
-    PaymentComponent
+    PaymentComponent,
+    UserdashboardComponent,
+    EditprofiluserComponent,
+    AdmindashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS,
+      useClass: tokenInterceptor,
+      multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

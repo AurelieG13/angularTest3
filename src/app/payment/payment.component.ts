@@ -11,6 +11,8 @@ export class PaymentComponent {
   paymentFormCb!: FormGroup;
   message!: string;
   radioValue!: string;
+  messageCheque: boolean = false;
+  messageCB: boolean = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -19,13 +21,13 @@ export class PaymentComponent {
       beneficiaryName: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(0.01)]],
       checkNumber: ['', Validators.required],
-      // Ajoutez d'autres champs si nécessaire
+
     });
     this.paymentFormCb = this.fb.group({
       cbNumber: ['', [Validators.required, Validators.minLength(12)]],
       validityDate: ['', [Validators.required]],
       securityCode: ['', Validators.required],
-      // Ajoutez d'autres champs si nécessaire
+
     });
   }
 
@@ -33,8 +35,7 @@ export class PaymentComponent {
     if (this.paymentForm.valid) {
       // Récupérez les données du formulaire et traitez le paiement par chèque
       const formData = this.paymentForm.value;
-      console.log('Payment details cheque:', formData);
-      // Ajoutez ici la logique pour traiter le paiement par chèque
+
     }
   }
 
@@ -48,10 +49,10 @@ export class PaymentComponent {
   }
 
   onPaymentCheck() {
-    this.message = "Votre commande sera traitée après réception de votre chèque";
+    this.messageCheque = true;
   }
 
   onPaymentCb() {
-    this.message = "Votre paiement a été effectué, vous recevrez vos billets par mail";
+    this.messageCB = true;
   }
 }

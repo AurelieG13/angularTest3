@@ -8,6 +8,9 @@ import { SportComponent } from './sport/sport.component';
 import { PanierComponent } from './panier/panier.component';
 import { BookingComponent } from './booking/booking.component';
 import { PaymentComponent } from './payment/payment.component';
+import { UserdashboardComponent } from './userdashboard/userdashboard.component';
+import { EditprofiluserComponent } from './editprofiluser/editprofiluser.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 
 const routes: Routes = [
   { path:"home", component: HomeComponent},
@@ -18,6 +21,9 @@ const routes: Routes = [
   { path: "payment", component: PaymentComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register',component: RegisterComponent },
+  { path:"admindashboard", component: AdmindashboardComponent},
+  { path:"userdashboard", component: UserdashboardComponent},
+  { path:"editprofiluser", component: EditprofiluserComponent},
   { path:"**", redirectTo: "home", pathMatch:"full"}
 ];
 

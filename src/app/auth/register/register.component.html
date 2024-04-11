@@ -1,39 +1,22 @@
-
-<div class="container mt-5">
+<div>
+  <button class="btn-custom btn" routerLink="/">Retour</button>
+</div>
+<div class="container mt-2">
+  <h1 class="text-center mt-2 mb-3">Inscription</h1>
   <div class="row justify-content-md-center">
-    <div class="col-md-4">
+    <div class="col-md-9">
       <form [formGroup]="myForm">
         <div class="alert alert-danger" *ngIf="err">
           <strong>{{err}}</strong>
         </div>
-        <!--prenom-->
-        <div class="form-group">
-          <label for="firstname">prénom :</label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            class="form- control"
-            formControlName="firstname"
-            [(ngModel)]="formData.userDTO.firstname"
-          />
-        </div>
-        <span
-          *ngIf="
-            myForm.controls['firstname'].hasError('required') &&
-            myForm.controls['firstname'].touched
-          "
-          class="text-danger"
-        >
-          firstname est obligatoire
-        </span>
+
         <!--nom-->
         <div class="form-group">
-          <label for="lastname">nom :</label>
+          <label for="lastname">Nom :</label>
           <input
             type="text"
             name="lastname"
-            class="form- control"
+            class="form-control"
             formControlName="lastname"
             [(ngModel)]="formData.userDTO.lastname"
           />
@@ -45,7 +28,29 @@
           "
           class="text-danger"
         >
-          lastname est obligatoire
+          Le nom est obligatoire
+        </span>
+
+        <!--prenom-->
+        <div class="form-group">
+          <label for="firstname">Prénom :</label>
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            class="form-control"
+            formControlName="firstname"
+            [(ngModel)]="formData.userDTO.firstname"
+          />
+        </div>
+        <span
+          *ngIf="
+            myForm.controls['firstname'].hasError('required') &&
+            myForm.controls['firstname'].touched
+          "
+          class="text-danger"
+        >
+          Le prénom est obligatoire
         </span>
 
         <!--Email/pseudo-->
@@ -54,7 +59,7 @@
           <input
             type="text"
             name="pseudo"
-            class="form- control"
+            class="form-control"
             formControlName="pseudo"
             [(ngModel)]="formData.authDTO.pseudo"
           />
@@ -66,8 +71,9 @@
           "
           class="text-danger"
         >
-          pseudo est obligatoire
+          L'email est obligatoire
         </span>
+
         <!--password-->
         <div class="form-group">
           <label for="password">Mot de passe :</label>
@@ -86,7 +92,7 @@
           "
           class="text-danger"
         >
-          mot de passe est obligatoire
+          Le mot de passe est obligatoire
         </span>
         <span
           *ngIf="
@@ -95,8 +101,9 @@
           "
           class="text-danger"
         >
-          mot de passe doit contenir au moins 6 caractères
+          Le mot de passe doit contenir au moins 6 caractères
         </span>
+
         <!--password confirm-->
         <div class="form-group">
           <label>Confirmer Mot de passe :</label>
@@ -114,7 +121,7 @@
           "
           class="text-danger"
         >
-          confirmer mot de passe est obligatoire
+          Confirmer mot de passe est obligatoire
         </span>
         <div>
           <span
@@ -125,21 +132,31 @@
             "
             class="text-danger"
           >
-            Le mot de passe confrmé ne correspond pas au mot de passe tapé
+            Le mot de passe confirmé ne correspond pas au mot de passe saisi
           </span>
+        </div>
+        <div class="form-check mt-1">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label label_custom" for="flexCheckDefault">
+            J'accepte les conditions d'utilisation
+          </label>
         </div>
 
         <!--button-->
-        <button
-          type="button"
+        <section class="text-center">
+          <button
+            (click)="sendDataToApi()"
+            type="button"
+            class="btn btn-custom mt-3">
+            S'inscrire
+          </button>
+        </section>
 
-          class="btn btn-success"
-          (click)="sendDataToApi()"
-        >
-          S'insrire
-        </button>
-
-        <p>vous avez un compte? <a routerLink="/login">se connecter </a></p>
+        <section class="text-center">
+                <hr>
+                <div class="mb-1">J'ai déjà un compte ? </div>
+                <a routerLink="/login" class="btn btn-custom">Se connecter</a>
+        </section>
       </form>
     </div>
   </div>

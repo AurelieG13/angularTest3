@@ -1,25 +1,36 @@
 <div>
-  <button routerLink="/">Retour</button>
+  <button class="btn-custom btn" routerLink="/">Retour</button>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-2">
+  <h1 class="text-center mt-2 mb-3">Connexion</h1>
   <div class="row justify-content-md-center">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div *ngIf="erreur==1" class="alert alert-danger">
         <strong>login ou pass erroné</strong>
       </div>
       <form >
         <div class="form-group">
-          <label>Nom utilisateur / pseudo</label>
+          <label>Email</label>
           <input type="text" name="pseudo" class="form-control" [(ngModel)]="user.pseudo">
         </div>
         <div class="form-group">
-          <label>mot de passe</label>
+          <label>Mot de passe</label>
           <input type="password" name="password" class="form-control" [(ngModel)]="user.password">
         </div>
         <div class="row justify-content-md-center">
-          <button class="btn btn-success" type="button" (click)="onLoggedin()">Connexion</button>
+          <button class="btn btn-custom mt-4" type="button" (click)="onLoggedin()">Connexion</button>
         </div>
+        <section class="text-center">
+          <hr>
+          <div class="mb-1">Je n'ai pas encore de compte ? </div>
+          <a routerLink="/register" class="btn btn-custom">S'inscrire</a>
+        </section>
+        <section class="text-center">
+          <hr>
+          <div class="mb-1">Mot de passe oublié ?</div>
+          <a routerLink="/register" class="btn btn-custom">Réinitialiser le mot de passe</a>
+        </section>
       </form>
     </div>
   </div>

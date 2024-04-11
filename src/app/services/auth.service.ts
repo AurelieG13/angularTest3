@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +16,14 @@ export class AuthService {
   public roles!: string[];
   public isloggedIn: Boolean = false;
   public loggedUser!: string;
+  userRole!: string;
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
+  isLoggedIn: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService
   ) { }
 
   login(user: User) {
@@ -26,8 +32,8 @@ export class AuthService {
 
   logout() {
     this.token = "";
-    localStorage.setItem('jwtToken', this.token);
-    return this.http.post(this.apiURLAuth+'/logout', {});
+    localStorage.removeItem('jwtToken');
+    this.isLoggedInSubject.next(false);
   }
 
   register(jsonData: any) : Observable<any> {
@@ -38,6 +44,9 @@ export class AuthService {
     return this.http.post<any>(this.apiURLUsers+'/saveUser', jsonData, {headers});
   }
 
+  getUserRole(): Observable<string> {
+    return this.http.get<string>(this.apiURLUsers+'/role');
+  }
 
 
 
@@ -46,16 +55,19 @@ export class AuthService {
   saveToken(jwtToken: string) {
     localStorage.setItem('jwtToken', jwtToken);
     this.token = jwtToken;
-    this.isloggedIn = true;
+    this.isLoggedInSubject.next(true);
   }
 
-  isAdmin():Boolean{
-    if (!this.roles){
-      return false;
-    }
 
-    return (this.roles.indexOf('ADMIN') >= 0);
+  isAdmin(): Observable<any> {
+    if (this.token) {
+      const decodeToken = this.jwtHelper.decodeToken(this.token);
+      this.userRole = decodeToken.roles;
+      console.log("service:", this.userRole);
+      return of(this.userRole);
     }
+    return throwError('Token absent ou invalide');
+  }
 
   getToken():string {
     return this.token;

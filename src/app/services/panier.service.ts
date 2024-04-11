@@ -102,12 +102,12 @@ export class PanierService{
   } */
 
   calculateSubtotals() {
-    const subtotals: {[key: number]: number} = {};
+    const subtotals: {[key: string]: number} = {};
     this.panier.forEach(item => {
-      if (!subtotals[item.id]) {
-        subtotals[item.id] = item.price;
+      if (!subtotals[item.name]) {
+        subtotals[item.name] = item.price;
       } else {
-        subtotals[item.id] += item.price;
+        subtotals[item.name] += item.price;
       }
     });
     return subtotals;

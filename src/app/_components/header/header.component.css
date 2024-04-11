@@ -1,0 +1,54 @@
+
+.logo {
+  max-width: 80%;
+  width: 450px;
+  height: auto;
+  background-color: #e9eeef;
+}
+
+/* Mise en forme navbar */
+.nav-custom {
+  background-color: #6d7070;
+}
+
+.logo-nav {
+  width: 250px;
+}
+.title-desktop-custom{
+  font-size: 32px;
+  text-decoration: underline;
+}
+
+.btn-menu-custom {
+  border-radius: 15px;
+  border: 4px solid #289b9b;
+  background-color:  white;
+  text-align: center;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.btn-custom {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #289b9b;
+  background-color:  #289b9b;
+}
+
+.btn-custom:hover{
+  background-color: #0b2222;
+}
+
+.connect_custom {
+  color: white;
+}
+
+.text-home-custom {
+  color: white;
+}
+
+.icon-connect, .dropdown-toggle {
+  color: white;
+}
