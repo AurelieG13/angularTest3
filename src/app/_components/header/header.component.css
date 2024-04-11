@@ -14,10 +14,6 @@
 .logo-nav {
   width: 250px;
 }
-.title-desktop-custom{
-  font-size: 32px;
-  text-decoration: underline;
-}
 
 .btn-menu-custom {
   border-radius: 15px;
@@ -42,13 +38,22 @@
 }
 
 .connect_custom {
-  color: white;
+  color: black;
 }
 
 .text-home-custom {
   color: white;
 }
 
-.icon-connect, .dropdown-toggle {
+.icon-connect{
   color: white;
+}
+
+.dropdown-toggle {
+  text-decoration: none;
+}
+
+.btn-custom-account {
+  background-color: white;
+  border: 2px solid #f4ef4f;
 }

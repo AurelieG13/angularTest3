@@ -20,4 +20,8 @@ export class SportService {
   getSportById(id: number): Observable<Sport> {
     return this.http.get<Sport>(this.apiUrlSport+'/id');
   }
+
+  createSport(sport: Sport) {
+    return this.http.post<Sport>(this.apiUrlSport+'/create', sport);
+  }
 }

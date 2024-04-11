@@ -12,6 +12,7 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 import { EditprofiluserComponent } from './editprofiluser/editprofiluser.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AuthGuard } from './guard.guard';
+import { SportFormComponent } from './sport/sport-form/sport-form.component';
 
 const routes: Routes = [
   { path:"home", component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path:"login", component: LoginComponent},
   { path:"register",component: RegisterComponent },
   { path:"admindashboard", component: AdmindashboardComponent, canActivate: [AuthGuard]},
+  { path:"sportCreate", component: SportFormComponent, canActivate: [AuthGuard]},
   { path:"userdashboard", component: UserdashboardComponent, canActivate: [AuthGuard]},
   { path:"editprofiluser", component: EditprofiluserComponent, canActivate: [AuthGuard]},
   { path:"**", redirectTo: "home", pathMatch:"full"}

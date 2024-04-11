@@ -3,6 +3,8 @@ import { User } from '../model/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { map } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -69,8 +71,26 @@ export class AuthService {
     return throwError('Token absent ou invalide');
   }
 
-  getToken():string {
-    return this.token;
+/*   getToken():string | null{
+    if (this.isLoggedIn) {
+      console.log("token stocké");
+      return this.token;
+    } */
+
+    getToken(): Observable<string | null> {
+      // Vérifiez si l'utilisateur est connecté en vérifiant l'état d'authentification dans votre service AuthService
+      return this.isLoggedIn.pipe(
+          map(isLoggedIn => {
+              if (isLoggedIn) {
+                  // Si l'utilisateur est connecté, retournez le token JWT
+                  return this.token;
+              } else {
+                  // Si l'utilisateur n'est pas connecté, retournez null ou une chaîne vide selon votre préférence
+                  return null; // ou return '';
+              }
+          })
+      );
+
   }
 
 

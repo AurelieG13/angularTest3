@@ -14,8 +14,8 @@
 
         <li><a *ngIf ="isLoggedIn && userRole.includes('ROLE_ADMIN')" class="dropdown-item" routerLink="/admindashboard">Panneau d'administration</a></li>
 
-        <li><a *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
-				<li><a *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
+        <li><a type="button" *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
+				<li><a type="button" *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
 			</ul>
 		</div>
 
@@ -27,7 +27,7 @@
 					<div class="col-2 dropdown navbar-text collapse navbar-collapse" *ngIf="isLoggedIn">
 						<a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<span class="navbar-text">
-								<i class="bi bi-person-circle icon-connect"> Accéder à mon compte</i>
+								<a type="button" class="btn btn-custom-account" > Accéder à mon compte</a>
 							</span>
 						</a>
 						<ul class="dropdown-menu">
@@ -38,12 +38,12 @@
 					</div>
 					<div class="col-2" *ngIf="!isLoggedIn">
 						<a routerLink="/login" class="connect_custom navbar-text collapse navbar-collapse justify-content-end">
-							<span class="icon-connect-text">Se connecter</span>
+							<span class="btn btn-custom-account">Se connecter</span>
 						</a>
 					</div>
 					<div class="col-2" *ngIf="!isLoggedIn">
 						<a routerLink="/register" class=" connect_custom navbar-text collapse navbar-collapse justify-content-end">
-							<span class="icon-connect-text">S'inscrire</span>
+							<span class="btn btn-custom-account">S'inscrire</span>
 						</a>
 					</div>
 			</div>
