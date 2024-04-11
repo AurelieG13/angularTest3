@@ -21,6 +21,7 @@ import { EditprofiluserComponent } from './editprofiluser/editprofiluser.compone
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { tokenInterceptor } from './services/token.interceptor';
+import { AuthGuard } from './guard.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('jwtToken');
@@ -58,6 +59,7 @@ export function tokenGetter() {
   ],
   providers: [
     JwtHelperService,
+    AuthGuard,
     { provide: HTTP_INTERCEPTORS,
       useClass: tokenInterceptor,
       multi : true}],

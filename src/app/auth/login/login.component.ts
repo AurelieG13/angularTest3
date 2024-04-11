@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,16 +8,24 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   user = new User();
   erreur: number = 0;
   err:number = 0;
+  message: string | null = null;
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute
       ){}
+
+    ngOnInit(): void {
+      this.route.queryParams.subscribe(params => {
+        this.message = params['message'] || null;
+      })
+    }
 
   onLoggedin(){
     this.authService.login(this.user).subscribe({

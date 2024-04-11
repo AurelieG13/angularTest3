@@ -11,19 +11,20 @@ import { PaymentComponent } from './payment/payment.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { EditprofiluserComponent } from './editprofiluser/editprofiluser.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AuthGuard } from './guard.guard';
 
 const routes: Routes = [
   { path:"home", component: HomeComponent},
   { path:"contact", component: ContactComponent},
   { path:"sports", component: SportComponent},
-  { path: "booking", component: BookingComponent},
-  { path:"panier", component: PanierComponent},
-  { path: "payment", component: PaymentComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register',component: RegisterComponent },
-  { path:"admindashboard", component: AdmindashboardComponent},
-  { path:"userdashboard", component: UserdashboardComponent},
-  { path:"editprofiluser", component: EditprofiluserComponent},
+  { path:"booking", component: BookingComponent, canActivate: [AuthGuard]},
+  { path:"panier", component: PanierComponent, canActivate: [AuthGuard]},
+  { path:"payment", component: PaymentComponent, canActivate: [AuthGuard]},
+  { path:"login", component: LoginComponent},
+  { path:"register",component: RegisterComponent },
+  { path:"admindashboard", component: AdmindashboardComponent, canActivate: [AuthGuard]},
+  { path:"userdashboard", component: UserdashboardComponent, canActivate: [AuthGuard]},
+  { path:"editprofiluser", component: EditprofiluserComponent, canActivate: [AuthGuard]},
   { path:"**", redirectTo: "home", pathMatch:"full"}
 ];
 
