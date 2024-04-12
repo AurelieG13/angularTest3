@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment.prod';
 
 
 
@@ -11,8 +12,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  apiURLAuth: string ='http://localhost:8080/api/auth';
-  apiURLUsers: string ='http://localhost:8080/api/users';
+  private apiUrl = environment.apiUrl
+  apiURLAuth: string = this.apiUrl+'/auth';
+  apiURLUsers: string = this.apiUrl+'/users';
 
   token!: string;
   public roles!: string[];

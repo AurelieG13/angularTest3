@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl:'http://monsite/api'
+  apiUrl:'http://212.132.121.118:8080/api'
 };
