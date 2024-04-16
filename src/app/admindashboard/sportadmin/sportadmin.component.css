@@ -1,0 +1,35 @@
+.btn-custom-modify {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #805500;
+  background-color: #e68a00;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #0d5a5a;
+  background-color: #289b9b;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-add {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #2a25bb;
+  background-color: #8171e8;
+  color: white;
+  text-align: center;
+}
+
+.btn-custom-delete {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #d21010;
+  background-color: #d24949;
+  color: white;
+  text-align: center;
+}

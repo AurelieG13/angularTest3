@@ -21,6 +21,7 @@ export class SportFormComponent {
         console.log("sport ajouté avec succès");
         this.successMessage = "Le sport a été ajouté avec succès"
         this.resetForm();
+        this.router.navigate(['/sportListAdmin']);
 
       },
       (error) => {

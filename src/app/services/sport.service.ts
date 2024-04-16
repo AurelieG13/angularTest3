@@ -19,10 +19,23 @@ export class SportService {
   }
 
   getSportById(id: number): Observable<Sport> {
-    return this.http.get<Sport>(this.apiUrlSport+'/id');
+    return this.http.get<Sport>(this.apiUrlSport+'/'+ id);
   }
 
   createSport(sport: Sport) {
     return this.http.post<Sport>(this.apiUrlSport+'/create', sport);
   }
+
+  deleteOneSport(id: number): Observable<Sport> {
+    return this.http.delete<Sport>(`${this.apiUrlSport}/${id}`);
+  }
+
+  // Méthode pour mettre à jour un utilisateur
+  updateSportAdmin(sport: Sport): Observable<Sport> {
+    const url = `${this.apiUrlSport}/${sport.id}`;
+    return this.http.put<Sport>(url, sport);
+  }
+
+
+
 }

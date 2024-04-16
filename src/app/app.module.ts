@@ -24,6 +24,7 @@ import { tokenInterceptor } from './services/token.interceptor';
 import { AuthGuard } from './guard.guard';
 import { SportFormComponent } from './sport/sport-form/sport-form.component';
 import { UserListAdminComponent } from './admindashboard/user-list-admin/user-list-admin.component';
+import { SportadminComponent } from './admindashboard/sportadmin/sportadmin.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwtToken');
@@ -47,7 +48,8 @@ export function tokenGetter() {
     EditprofiluserComponent,
     AdmindashboardComponent,
     SportFormComponent,
-    UserListAdminComponent
+    UserListAdminComponent,
+    SportadminComponent
   ],
   imports: [
     BrowserModule,

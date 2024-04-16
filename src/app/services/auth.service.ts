@@ -62,10 +62,16 @@ export class AuthService {
   }
 
     // Méthode pour mettre à jour un utilisateur
-    updateUser(user: UserDTO): Observable<UserDTO> {
-      const url = `${this.apiURLUsers}/currentUser/${user.id}`;
-      return this.http.put<UserDTO>(url, user);
-    }
+  updateUserAdmin(user: UserDTO): Observable<UserDTO> {
+    const url = `${this.apiURLUsers}/admin/${user.id}`;
+    return this.http.put<UserDTO>(url, user);
+  }
+
+  // Méthode pour mettre à jour un utilisateur
+  updateUser(user: UserDTO): Observable<UserDTO> {
+    const url = `${this.apiURLUsers}/currentUser/${user.id}`;
+    return this.http.put<UserDTO>(url, user);
+  }
 
 
   //methods
