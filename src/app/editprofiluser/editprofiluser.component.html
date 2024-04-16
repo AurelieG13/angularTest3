@@ -16,48 +16,72 @@
                           <strong>erreur</strong>
                         </div>
 
+                        <!--id-->
+                        <div *ngIf="currentUser">
+                          <input type="hidden" id="id" name="id" [value]="currentUser.id">
+                        </div>
+
+
                         <!--nom-->
-                        <div class="form-group">
-                          <label for="lastname">Nom :</label>
+                        <div class="form-group mt-2" *ngIf="currentUser">
+                          <label for="lastname">Nom : </label>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.lastname}} </span>
                           <input
+                            *ngIf="editing"
                             type="text"
+                            id="lastname"
                             name="lastname"
                             class="form-control"
                             formControlName="lastname"
-                          />
+                            [(ngModel)]="currentUser.lastname">
                         </div>
 
                         <!--prenom-->
-                        <div class="form-group">
+                        <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="firstname">Prénom :</label>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.firstname}} </span>
                           <input
+                            *ngIf="editing"
                             type="text"
                             id="firstname"
                             name="firstname"
                             class="form-control"
-                            formControlName="firstname"/>
+                            formControlName="firstname"
+                            [(ngModel)]="currentUser.firstname">
                         </div>
 
                         <!--téléphone-->
-                        <div class="form-group">
+                        <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="phone">Téléphone :</label>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.phone}} </span>
                           <input
+                            *ngIf="editing"
                             type="text"
                             id="phone"
                             name="phone"
                             class="form-control"
-                            formControlName="phone"/>
+                            formControlName="phone"
+                            [(ngModel)]="currentUser.phone">
+                        </div>
+
+                        <!--email-->
+                        <div class="form-group mt-2" *ngIf="currentUser">
+                          <label for="email">Email :</label>
+                          <span class="form-control"> {{ currentUser.email }}</span>
                         </div>
 
                         <!--button-->
-                        <section class="text-center">
-                          <button
+                        <!--bouton Modifier-->
+                        <div class="mt-4">
+                          <button type="button" class="btn btn-custom" (click)="toggleEditing()" *ngIf="!editing">Modifier</button>
+                        </div>
 
-                            type="button"
-                            class="btn btn-custom mt-3">
-                            Valider
-                          </button>
-                        </section>
+
+                        <!--bouton Valider-->
+                        <div class="mt-4">
+                          <button type="button" class="btn btn-custom-valid" (click)="saveChanges()" *ngIf="editing">Valider</button>
+                        </div>
+
 
                       </form>
                     </div>

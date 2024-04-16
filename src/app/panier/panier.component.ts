@@ -10,32 +10,6 @@ import { Sport } from '../model/sport.model';
 export class PanierComponent implements OnInit{
   panierId!: number;
 
-/*   constructor(private panierService: PanierService) {}
- */
-/*   ngOnInit(): void {
-    // Au chargement du composant, créez un nouveau panier
-    this.panierService.panierId$.subscribe((panierId) => {
-      this.panierId = panierId;
-    })
-  } */
-
-
-/*   addSportToPanier(sportId: number): void {
-    // Ajouter un produit au panier
-    this.panierService.addSportToPanier(this.panierId, sportId).subscribe((response) => {
-      console.log(response);
-      // Actualisez le contenu du panier ou effectuez d'autres actions nécessaires
-    });
-  } */
-
-/*   checkoutPanier(): void {
-    // Finaliser l'achat
-    this.panierService.checkoutPanier(this.panierId).subscribe((response) => {
-      console.log(response);
-      // Effectuez des actions après la finalisation de l'achat
-    });
-  } */
-
   sports: Sport[] = [];
   panier: any[] = [];
 

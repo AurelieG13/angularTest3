@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sport } from '../model/sport.model';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SportService {
-
-  private apiUrlSport = 'http://localhost:8080/api/sports';
+  private apiUrl = environment.apiUrl
+  private apiUrlSport = this.apiUrl+'/sports';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

@@ -9,12 +9,15 @@
                     <h3 class="text-center" >Bienvenue sur votre profil</h3>
                     <p>Gérer vos informations personnelles en cliquant sur <a routerLink="/editprofiluser"> Vos Informations Personnelles</a></p>
                     <section class=" separator d-flex justify-content-around flex-wrap">
-                        <div class="card mt-3" style="width: 18rem;">
+                        <div class="card mt-3" style="width: 25rem;">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Informations personnelles</h5>
-                                <p class="card-text">Nom Prénom :</p>
-                                <p class="card-text">Téléphone : </p>
-                                <p class="card-text">Email : </p>
+                                <div *ngIf="currentUser">
+                                  <p class="card-text">Nom Prénom : {{ currentUser.lastname }} {{ currentUser.firstname }}</p>
+                                  <p class="card-text">Téléphone : {{ currentUser.phone }}</p>
+                                  <p class="card-text">Email : {{ currentUser.email }}</p>
+                                </div>
+
                             </div>
                         </div>
                     </section>

@@ -6,3 +6,12 @@
   color: white;
   text-align: center;
 }
+
+.btn-custom-valid {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #8fee5c;
+  background-color: #30d68b;
+  color: white;
+  text-align: center;
+}

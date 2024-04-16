@@ -1,16 +1,27 @@
-<form (ngSubmit)="onSubmit()">
-  <label for="name">Nom :</label>
-  <input type="text" id="name" name="name" [(ngModel)]="sport.name" required>
+<div>
+  <button class="btn-custom btn" routerLink="/admindashboard">Retour</button>
+</div>
 
-  <label for="description">Description :</label>
-  <textarea id="description" name="description" [(ngModel)]="sport.description" required></textarea>
+<div class="container mt-2">
+  <h1 class="text-center mt-2 mb-3">Ajouter un sport</h1>
+  <div class="row justify-content-md-center">
+    <div class="col-md-9">
+      <form (ngSubmit)="onSubmit()">
+        <label for="name"  class="form-label">Nom :</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="sport.name" required>
 
-  <label for="price">Prix :</label>
-  <input type="text" id="price" name="price" [(ngModel)]="sport.price" required>
+        <label for="description"  class="form-label">Description :</label>
+        <textarea id="description" class="form-control" name="description" [(ngModel)]="sport.description" required></textarea>
 
-  <button type="submit">Ajouter le sport</button>
-</form>
+        <label for="price"  class="form-label">Prix :</label>
+        <input type="text" class="form-control" id="price" name="price" [(ngModel)]="sport.price" required>
 
-<div *ngIf="successMessage" class="alert alert-success">
-  {{ successMessage }}
+        <button type="submit" class="btn btn-custom mt-3">Ajouter le sport</button>
+      </form>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
 </div>

@@ -23,6 +23,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { tokenInterceptor } from './services/token.interceptor';
 import { AuthGuard } from './guard.guard';
 import { SportFormComponent } from './sport/sport-form/sport-form.component';
+import { UserListAdminComponent } from './admindashboard/user-list-admin/user-list-admin.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwtToken');
@@ -45,7 +46,8 @@ export function tokenGetter() {
     UserdashboardComponent,
     EditprofiluserComponent,
     AdmindashboardComponent,
-    SportFormComponent
+    SportFormComponent,
+    UserListAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { UserDTO } from '../model/user-auth-dto.model';
 
 @Component({
   selector: 'app-userdashboard',
@@ -7,23 +9,33 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 })
 export class UserdashboardComponent implements OnInit {
 
-  constructor(private el: ElementRef) {}
+  currentUser!: UserDTO;
+
+  constructor(private el: ElementRef, private authService: AuthService) {}
 
 
   ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe(
+            (user: UserDTO) => {
+              this.currentUser = user;
+              console.log(this.currentUser);
+            },
+            error => {
+              console.error('Erreur current user', error);
+            }
+          );
+
     let alldrpdwn = document.querySelectorAll('.dropdown-container');
-    console.log(alldrpdwn, 'alldrpdwn#');
 
     alldrpdwn.forEach( (item:any) => {
       const a = item.parentElement.querySelector('a:first-child');
-      console.log(a, 'a#');
       a.addEventListener('click',(e:any) => {
         e.preventDefault();
         this.el.nativeElement.classList.toggle('active');
         item.classList.toggle('show');
       });
-
     });
+
 
   }
 
