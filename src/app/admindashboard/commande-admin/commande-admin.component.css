@@ -1,0 +1,8 @@
+.btn-custom-delete {
+  font-size: 18px;
+  border-radius: 15px;
+  border: 1px solid #d21010;
+  background-color: #d24949;
+  color: white;
+  text-align: center;
+}

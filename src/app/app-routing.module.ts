@@ -15,6 +15,7 @@ import { AuthGuard } from './guard.guard';
 import { SportFormComponent } from './sport/sport-form/sport-form.component';
 import { UserListAdminComponent } from './admindashboard/user-list-admin/user-list-admin.component';
 import { SportadminComponent } from './admindashboard/sportadmin/sportadmin.component';
+import { CommandeAdminComponent } from './admindashboard/commande-admin/commande-admin.component';
 
 const routes: Routes = [
   { path:"home", component: HomeComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path:"sportCreate", component: SportFormComponent, canActivate: [AuthGuard]},
   { path:"userListAdmin", component: UserListAdminComponent, canActivate: [AuthGuard]},
   { path:"sportListAdmin", component: SportadminComponent, canActivate: [AuthGuard]},
+  { path:"commandeAdmin", component: CommandeAdminComponent, canActivate: [AuthGuard]},
   { path:"userdashboard", component: UserdashboardComponent, canActivate: [AuthGuard]},
   { path:"editprofiluser", component: EditprofiluserComponent, canActivate: [AuthGuard]},
   { path:"**", redirectTo: "home", pathMatch:"full"}

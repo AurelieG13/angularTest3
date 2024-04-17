@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Sport } from '../../model/sport.model';
 import { SportService } from '../../services/sport.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './sportadmin.component.html',
   styleUrl: './sportadmin.component.css'
 })
-export class SportadminComponent {
+export class SportadminComponent implements OnInit {
 
   sports: Sport[] = [];
 

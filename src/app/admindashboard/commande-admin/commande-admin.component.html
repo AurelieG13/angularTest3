@@ -1,0 +1,41 @@
+    <div class="mb-4">
+        <a type="button" class="btn btn-custom" routerLink="/admindashboard">Retour</a>
+    </div>
+
+    <h1>Liste des commandes </h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="text-center">
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Prix</td>
+            <td>Type de paiement</td>
+            <td colspan="2">Actions</td>
+        </tr>
+    </thead>
+    <tbody *ngFor="let commande of commandes; let i = index">
+        <tr class="text-center">
+            <td>
+              <span>{{ commande.beneficiaryName }}</span>
+            </td>
+            <td>
+              <span>{{ commande.beneficiaryFirstname }}</span>
+            </td>
+            <td>
+              <span>{{ commande.amount }} €</span>
+            </td>
+            <td>
+              <span>{{ commande.paymentType }}</span>
+            </td>
+            <td>
+              <!--button-->
+              <!--bouton Modifier-->
+              <div>
+                <button type="button" class="btn btn-custom-delete ms-2 me-2" (click)="deleteOneCommande(commande.id)">Supprimer</button>
+              </div>
+          </td>
+        </tr>
+    </tbody>
+</table>
+

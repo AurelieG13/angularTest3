@@ -4,6 +4,8 @@ import { PanierService } from '../services/panier.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Margins, TDocumentDefinitions, TDocumentInformation } from 'pdfmake/interfaces';
+import { CommandeService } from '../services/commande.service';
+import { AuthService } from '../services/auth.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -21,8 +23,16 @@ export class PaymentComponent {
   messageCB: boolean = false;
   totalPanier!: number;
   subtotalPanier: {[key: string]: number} = {};
+  commandeId!: any;
+  beneficiary: string = '';
 
-  constructor(private fb: FormBuilder, private panierService: PanierService) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private panierService: PanierService,
+    private commandeService: CommandeService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
@@ -42,20 +52,65 @@ export class PaymentComponent {
     console.log('total pannier :', this.totalPanier);
   }
 
-  onSubmitCheck(): void {
-    if (this.paymentForm.valid) {
-      // Récupérez les données du formulaire et traitez le paiement par chèque
-      const formData = this.paymentForm.value;
+  onSubmit() {
+    if (this.paymentForm.valid && this.totalPanier !== 0) {
+    this.authService.getCurrentUser().subscribe(
+      (user) => {
+        const commande = {
+          beneficiaryName: user.lastname,
+          beneficiaryFirstname: user.firstname,
+          amount: this.totalPanier,
+          paymentType: "Carte bleue"
+        };
+        this.beneficiary = user.firstname + " " + user.lastname;
+        this.commandeService.envoyerCommande(commande).subscribe(
+              (response) => {
+                this.commandeId = response.id;
+                this.generatePDF(this.commandeId);
+                console.log("commande envoyée avec succès", response);
+              },
+              (error) => {
+                console.error('Erreur lors de l\'envoi de la commande au backend:', error);
+              }
+            );
+        this.messageCB = true;
 
-    }
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération du user:', error);
+      }
+    );
+  }
   }
 
-  onSubmitCb(): void {
-    if (this.paymentFormCb.valid) {
-      // Récupérez les données du formulaire et traitez le paiement par cb
-      const formData = this.paymentFormCb.value;
-      console.log('Payment details cb:', formData);
-      // Ajoutez ici la logique pour traiter le paiement par cb
+  onSubmitCheck(): void {
+    if (this.paymentForm.valid && this.totalPanier !== 0) {
+      this.authService.getCurrentUser().subscribe(
+        (user) => {
+          const commande = {
+            beneficiaryName: user.lastname,
+            beneficiaryFirstname: user.firstname,
+            amount: this.totalPanier,
+            paymentType: "Chèque"
+          };
+          this.beneficiary = user.firstname + " " + user.lastname;
+          this.commandeService.envoyerCommande(commande).subscribe(
+                (response) => {
+                  this.commandeId = response.id;
+                  this.generatePDFCheck(this.commandeId);
+                  console.log("commande envoyée avec succès", response);
+                },
+                (error) => {
+                  console.error('Erreur lors de l\'envoi de la commande au backend:', error);
+                }
+              );
+          this.messageCheque = true;
+
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération du user:', error);
+        }
+      );
     }
   }
 
@@ -68,7 +123,7 @@ export class PaymentComponent {
   }
 
 
-  generatePDF(): void {
+  generatePDF(commandeId: any): void {
     const data = [
       ['Sport', 'Total par sport']
     ];
@@ -83,15 +138,20 @@ export class PaymentComponent {
 
     const documentDefinition: TDocumentDefinitions = {
       content: [
-        { text: 'Montant total du panier: ' + this.totalPanier + ' €', style: 'subheader' },
-        { text: 'Détail du panier', style: 'header' },
+        { text: 'Jeux Olympiques - Paris 2024', style: 'header' },
+        { text: 'Numéro de votre commande : '+ commandeId, style: 'subheader'},
+        { text: 'Nom Prénom : '+ this.beneficiary, style: 'subheader'},
+        { text: 'Montant total payé : ' + this.totalPanier + ' €', style: 'subheader' },
+        { text: 'Paiement par Carte Bleue validé ', style: 'classic'},
+        { text: 'Détail de la réservation', style: 'header' },
         { table: { body: data } },
-        { qr: qrCodeData, fit:150, margin: [0,10,0,0]}
+        { qr: qrCodeData, fit:150, margin: [30,10,10,10]}
 
       ],
       styles: {
-        header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-        subheader: { fontSize: 16, bold: true, margin: [0, 10, 0, 5] }
+        header: { fontSize: 18, bold: true, margin: [20, 0, 15, 10] },
+        subheader: { fontSize: 14, bold: false, margin: [0, 10, 5, 10] },
+        classic: { fontSize: 12, bold: false, margin: [0, 10, 5, 10]}
       }
     };
 
@@ -99,7 +159,39 @@ export class PaymentComponent {
   }
 
 
+  generatePDFCheck(commandeId: any): void {
+    const data = [
+      ['Sport', 'Total par sport']
+    ];
 
+    for (const key in this.subtotalPanier) {
+      if (this.subtotalPanier.hasOwnProperty(key)) {
+        data.push([key, this.subtotalPanier[key] + ' €']);
+      }
+    }
+
+    const qrCodeData = JSON.stringify(this.subtotalPanier);
+
+    const documentDefinition: TDocumentDefinitions = {
+      content: [
+        { text: 'Jeux Olympiques - Paris 2024', style: 'header' },
+        { text: 'Numéro de votre commande : '+ commandeId, style: 'subheader'},
+        { text: 'Nom Prénom : '+ this.beneficiary, style: 'subheader'},
+        { text: 'Montant total restant à payer : ' + this.totalPanier + ' €', style: 'subheader' },
+        { text: 'Paiement par chèque à faire ', style: 'classic'},
+        { text: 'Détail de la réservation NON VALIDEE', style: 'header' },
+        { table: { body: data } },
+
+      ],
+      styles: {
+        header: { fontSize: 18, bold: true, margin: [20, 0, 15, 10] },
+        subheader: { fontSize: 14, bold: false, margin: [0, 10, 5, 10] },
+        classic: { fontSize: 12, bold: false, margin: [0, 10, 5, 10]}
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).download('detail_panier_cheque.pdf');
+  }
 
 
 
