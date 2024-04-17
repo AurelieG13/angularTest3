@@ -42,15 +42,16 @@
 </div>
 
 
-
+<hr>
 
 <div *ngIf="radioValue === 'flexRadioDefault1'">
+  <div>
+    <span>Montant total à régler : {{ totalPanier }} €</span>
+  </div>
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmitCheck()">
+
     <label class="form-label" for="beneficiaryName">Nom de l'emetteur du chèque :</label>
     <input class="form-control" type="text" id="beneficiaryName" formControlName="beneficiaryName">
-
-    <label class="form-label" for="amount">Montant : </label>
-    <input class="form-control" type="number" id="amount" formControlName="amount">
 
     <label class="form-label" for="checkNumber">Numéro de chèque :</label>
     <input class="form-control" type="text" id="checkNumber" formControlName="checkNumber">
@@ -64,7 +65,11 @@
 </div>
 
 <div *ngIf="radioValue === 'flexRadioDefault2'">
+    <div>
+    <span>Montant total à régler : {{ totalPanier }} €</span>
+  </div>
     <form [formGroup]="paymentFormCb" (ngSubmit)="onSubmitCb()">
+
     <label class="form-label" for="cbNumber">Numero de CB :</label>
     <input class="form-control" type="number" id="cbNumber" formControlName="cbNumber">
 
@@ -74,9 +79,11 @@
     <label class="form-label" for="securityCode">Code de sécurité :</label>
     <input class="form-control" type="text" id="securityCode" formControlName="securityCode">
 
-    <button class="btn btn-custom-payment mt-3" type="submit" (click)="onPaymentCb()">Payer par Carte bleue</button>
+    <button class="btn btn-custom-payment mt-3 me-3" type="submit" (click)="onPaymentCb()">Payer par Carte bleue</button>
+
+    <button class="btn btn-custom mt-3" (click)="generatePDF()">Générer PDF</button>
     <div *ngIf="messageCB" class="alert alert-info mt-2">
-      Votre paiement a été effectué, vous recevrez vos billets par mail sous 2 heures
+      Votre paiement a été effectué, vous pouvez générer votre e-billet en cliquant sur Générer PDF
     </div>
   </form>
 </div>

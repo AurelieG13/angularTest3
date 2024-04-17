@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PanierService } from '../services/panier.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Margins, TDocumentDefinitions, TDocumentInformation } from 'pdfmake/interfaces';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-payment',
@@ -22,7 +27,6 @@ export class PaymentComponent {
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
       beneficiaryName: ['', Validators.required],
-      amount: ['', [Validators.required, Validators.min(0.01)]],
       checkNumber: ['', Validators.required],
 
     });
@@ -34,6 +38,8 @@ export class PaymentComponent {
     });
     this.totalPanier = this.panierService.calculerTotal();
     this.subtotalPanier = this.panierService.calculateSubtotals();
+    console.log('subtotal pannier :', this.subtotalPanier);
+    console.log('total pannier :', this.totalPanier);
   }
 
   onSubmitCheck(): void {
@@ -46,10 +52,10 @@ export class PaymentComponent {
 
   onSubmitCb(): void {
     if (this.paymentFormCb.valid) {
-      // Récupérez les données du formulaire et traitez le paiement par chèque
+      // Récupérez les données du formulaire et traitez le paiement par cb
       const formData = this.paymentFormCb.value;
       console.log('Payment details cb:', formData);
-      // Ajoutez ici la logique pour traiter le paiement par chèque
+      // Ajoutez ici la logique pour traiter le paiement par cb
     }
   }
 
@@ -60,4 +66,42 @@ export class PaymentComponent {
   onPaymentCb() {
     this.messageCB = true;
   }
+
+
+  generatePDF(): void {
+    const data = [
+      ['Sport', 'Total par sport']
+    ];
+
+    for (const key in this.subtotalPanier) {
+      if (this.subtotalPanier.hasOwnProperty(key)) {
+        data.push([key, this.subtotalPanier[key] + ' €']);
+      }
+    }
+
+    const qrCodeData = JSON.stringify(this.subtotalPanier);
+
+    const documentDefinition: TDocumentDefinitions = {
+      content: [
+        { text: 'Montant total du panier: ' + this.totalPanier + ' €', style: 'subheader' },
+        { text: 'Détail du panier', style: 'header' },
+        { table: { body: data } },
+        { qr: qrCodeData, fit:150, margin: [0,10,0,0]}
+
+      ],
+      styles: {
+        header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+        subheader: { fontSize: 16, bold: true, margin: [0, 10, 0, 5] }
+      }
+    };
+
+    pdfMake.createPdf(documentDefinition).download('detail_panier.pdf');
+  }
+
+
+
+
+
+
+
 }
