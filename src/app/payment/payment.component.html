@@ -16,8 +16,14 @@
   </div>
 </div>
 
-
 <hr>
+<!-- Affichage du montant total -->
+<div class="container">
+  <h3 class="text-center">Montant total du panier : {{ totalPanier }} €</h3>
+</div>
+
+
+
 <div *ngIf="radioValue === 'flexRadioDefault1'">
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmitCheck()">
     <label class="form-label" for="beneficiaryName">Nom de l'emetteur du chèque :</label>

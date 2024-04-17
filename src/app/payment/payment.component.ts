@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PanierService } from '../services/panier.service';
 
 @Component({
   selector: 'app-payment',
@@ -13,8 +14,9 @@ export class PaymentComponent {
   radioValue!: string;
   messageCheque: boolean = false;
   messageCB: boolean = false;
+  totalPanier!: number;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private panierService: PanierService) {}
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
@@ -29,6 +31,7 @@ export class PaymentComponent {
       securityCode: ['', Validators.required],
 
     });
+    this.totalPanier = this.panierService.calculerTotal();
   }
 
   onSubmitCheck(): void {

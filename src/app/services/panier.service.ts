@@ -41,8 +41,8 @@ export class PanierService{
     this.panier = [];
   }
 
-  deleteOneSport(index: number): void {
-    this.panier.splice(index, 1);
+  deleteOneSport(sportId: number): void {
+    this.panier = this.panier.filter(item => item.id !== sportId);
   }
 
   calculerTotal(): number {

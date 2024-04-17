@@ -25,8 +25,7 @@
               <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.firstname">
             </td>
             <td>
-              <span *ngIf="i !== editingUserIndex">{{ user.email }}</span>
-              <input *ngIf="i === editingUserIndex" type="email" [(ngModel)]="user.email">
+              <span>{{ user.email }}</span>
             </td>
             <td>
               <span *ngIf="i !== editingUserIndex">{{ user.phone }}</span>
