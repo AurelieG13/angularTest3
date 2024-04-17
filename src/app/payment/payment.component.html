@@ -22,6 +22,26 @@
   <h3 class="text-center">Montant total du panier : {{ totalPanier }} €</h3>
 </div>
 
+<!-- Affichage du détail du panier -->
+<div class="container">
+  <h3 class="text-center">Détail du panier</h3>
+  <table class="table table-striped table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Sport</th>
+        <th>Total par sport</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subtotal of subtotalPanier | keyvalue">
+        <td>{{ subtotal.key }}</td>
+        <td>{{ subtotal.value }} €</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 
 
 <div *ngIf="radioValue === 'flexRadioDefault1'">

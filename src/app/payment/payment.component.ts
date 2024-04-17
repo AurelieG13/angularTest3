@@ -15,6 +15,7 @@ export class PaymentComponent {
   messageCheque: boolean = false;
   messageCB: boolean = false;
   totalPanier!: number;
+  subtotalPanier: {[key: string]: number} = {};
 
   constructor(private fb: FormBuilder, private panierService: PanierService) {}
 
@@ -32,6 +33,7 @@ export class PaymentComponent {
 
     });
     this.totalPanier = this.panierService.calculerTotal();
+    this.subtotalPanier = this.panierService.calculateSubtotals();
   }
 
   onSubmitCheck(): void {
