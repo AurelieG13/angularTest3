@@ -5,7 +5,7 @@ export interface UserDTO {
   "phone": string;
   "email": string;
 }
-/*
+
 export interface AuthDTO {
   "pseudo": string;
   "password": string;
@@ -16,4 +16,4 @@ export interface UserAuthDTO {
   userDTO: UserDTO;
   authDTO: AuthDTO;
 }
- */
+

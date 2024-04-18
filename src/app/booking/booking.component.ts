@@ -33,7 +33,6 @@ export class BookingComponent {
   addSport(sport: Sport): void {
     this.panierService.addSport(sport);
     this.paniers = this.getPanier();
-
   }
 
   addSolo(sport: Sport): void {

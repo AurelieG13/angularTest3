@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { UserDTO } from '../model/user-auth-dto.model';
+import { UserAuthDTO, UserDTO } from '../model/user-auth-dto.model';
 
 @Component({
   selector: 'app-userdashboard',
@@ -9,14 +9,14 @@ import { UserDTO } from '../model/user-auth-dto.model';
 })
 export class UserdashboardComponent implements OnInit {
 
-  currentUser!: UserDTO;
+  currentUser!: UserAuthDTO;
 
   constructor(private el: ElementRef, private authService: AuthService) {}
 
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe(
-            (user: UserDTO) => {
+            (user: UserAuthDTO) => {
               this.currentUser = user;
               console.log(this.currentUser);
             },

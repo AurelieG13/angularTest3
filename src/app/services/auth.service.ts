@@ -5,7 +5,7 @@ import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
-import { UserDTO } from '../model/user-auth-dto.model';
+import { UserAuthDTO, UserDTO } from '../model/user-auth-dto.model';
 
 
 
@@ -53,24 +53,24 @@ export class AuthService {
     return this.http.get<string>(this.apiURLUsers+'/role');
   }
 
-  getCurrentUser(): Observable<UserDTO> {
-    return this.http.get<UserDTO>(this.apiURLUsers+'/currentUser');
+  getCurrentUser(): Observable<UserAuthDTO> {
+    return this.http.get<UserAuthDTO>(this.apiURLUsers+'/currentUser');
   }
 
-  getUsers(): Observable<UserDTO[]> {
-    return this.http.get<UserDTO[]>(this.apiURLUsers+'/all');
+  getUsers(): Observable<UserAuthDTO[]> {
+    return this.http.get<UserAuthDTO[]>(this.apiURLUsers+'/all');
   }
 
     // Méthode pour mettre à jour un utilisateur
-  updateUserAdmin(user: UserDTO): Observable<UserDTO> {
-    const url = `${this.apiURLUsers}/admin/${user.id}`;
-    return this.http.put<UserDTO>(url, user);
+  updateUserAdmin(user: UserAuthDTO): Observable<UserAuthDTO> {
+    const url = `${this.apiURLUsers}/admin/${user.userDTO.id}`;
+    return this.http.put<UserAuthDTO>(url, user);
   }
 
   // Méthode pour mettre à jour un utilisateur
-  updateUser(user: UserDTO): Observable<UserDTO> {
-    const url = `${this.apiURLUsers}/currentUser/${user.id}`;
-    return this.http.put<UserDTO>(url, user);
+  updateUser(user: UserAuthDTO): Observable<UserAuthDTO> {
+    const url = `${this.apiURLUsers}/currentUser/${user.userDTO.id}`;
+    return this.http.put<UserAuthDTO>(url, user);
   }
 
 
