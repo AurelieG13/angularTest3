@@ -53,7 +53,7 @@ export class PaymentComponent {
   }
 
   onSubmit() {
-    if (this.paymentForm.valid && this.totalPanier !== 0) {
+    if (this.paymentFormCb.valid && this.totalPanier !== 0) {
     this.authService.getCurrentUser().subscribe(
       (user) => {
         const commande = {
