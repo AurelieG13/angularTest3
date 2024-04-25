@@ -18,14 +18,14 @@
 
                         <!--id-->
                         <div *ngIf="currentUser">
-                          <input type="hidden" id="id" name="id" [value]="currentUser.userDTO.id">
+                          <input type="hidden" id="id" name="id" [value]="currentUser.id">
                         </div>
 
 
                         <!--nom-->
                         <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="lastname">Nom : </label>
-                          <span *ngIf="!editing" class="form-control"> {{ currentUser.userDTO.lastname}} </span>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.lastname}} </span>
                           <input
                             *ngIf="editing"
                             type="text"
@@ -33,13 +33,13 @@
                             name="lastname"
                             class="form-control"
                             formControlName="lastname"
-                            [(ngModel)]="currentUser.userDTO.lastname">
+                            [(ngModel)]="currentUser.lastname">
                         </div>
 
                         <!--prenom-->
                         <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="firstname">Prénom :</label>
-                          <span *ngIf="!editing" class="form-control"> {{ currentUser.userDTO.firstname}} </span>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.firstname}} </span>
                           <input
                             *ngIf="editing"
                             type="text"
@@ -47,13 +47,13 @@
                             name="firstname"
                             class="form-control"
                             formControlName="firstname"
-                            [(ngModel)]="currentUser.userDTO.firstname">
+                            [(ngModel)]="currentUser.firstname">
                         </div>
 
                         <!--téléphone-->
                         <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="phone">Téléphone :</label>
-                          <span *ngIf="!editing" class="form-control"> {{ currentUser.userDTO.phone}} </span>
+                          <span *ngIf="!editing" class="form-control"> {{ currentUser.phone}} </span>
                           <input
                             *ngIf="editing"
                             type="text"
@@ -61,13 +61,13 @@
                             name="phone"
                             class="form-control"
                             formControlName="phone"
-                            [(ngModel)]="currentUser.userDTO.phone">
+                            [(ngModel)]="currentUser.phone">
                         </div>
 
                         <!--email-->
                         <div class="form-group mt-2" *ngIf="currentUser">
                           <label for="email">Email :</label>
-                          <span class="form-control"> {{ currentUser.userDTO.email }}</span>
+                          <span class="form-control"> {{ currentUser.email }}</span>
                         </div>
 
                         <!--button-->

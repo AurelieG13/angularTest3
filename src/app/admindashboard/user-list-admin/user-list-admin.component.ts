@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { UserAuthDTO, UserDTO } from '../../model/user-auth-dto.model';
+import { UserDTO } from '../../model/user-auth-dto.model';
 import { User } from '../../model/user.model';
 
 @Component({
@@ -9,14 +9,14 @@ import { User } from '../../model/user.model';
   styleUrl: './user-list-admin.component.css'
 })
 export class UserListAdminComponent implements OnInit{
-  users: UserAuthDTO[] = [];
+  users: UserDTO[] = [];
 
   constructor(private authService: AuthService) {}
   editingUserIndex: number = -1;
 
   ngOnInit(): void {
     this.authService.getUsers().subscribe(
-      (users: UserAuthDTO[]) => {
+      (users: UserDTO[]) => {
         this.users = users;
         console.log(this.users);
       },
@@ -26,12 +26,12 @@ export class UserListAdminComponent implements OnInit{
     );
   }
 
-  updateUser(user: UserAuthDTO): void {
+  updateUser(user: UserDTO): void {
     console.log('Mise à jour de l\'utilisateur :', user);
     this.authService.updateUserAdmin(user).subscribe(
-      (updatedUser: UserAuthDTO) => {
+      (updatedUser: UserDTO) => {
         console.log('Utilisateur mis à jour :', updatedUser);
-        const index = this.users.findIndex(u => u.userDTO.id === updatedUser.userDTO.id);
+        const index = this.users.findIndex(u => u.id === updatedUser.id);
         if (index !== -1) {
           this.users[index] = updatedUser;
         }
@@ -50,13 +50,13 @@ export class UserListAdminComponent implements OnInit{
     return index === this.editingUserIndex;
   }
 
-  updateUserAdmin(user: UserAuthDTO): void {
+  updateUserAdmin(user: UserDTO): void {
     // Mettre à jour l'utilisateur dans la base de données
     this.authService.updateUserAdmin(user).subscribe(
       updatedUser => {
 
         // Mettre à jour l'utilisateur dans la liste des utilisateurs
-        const index = this.users.findIndex(u => u.userDTO.id === updatedUser.userDTO.id);
+        const index = this.users.findIndex(u => u.id === updatedUser.id);
         if (index !== -1) {
           this.users[index] = updatedUser;
         }

@@ -57,12 +57,12 @@ export class PaymentComponent {
     this.authService.getCurrentUser().subscribe(
       (user) => {
         const commande = {
-          beneficiaryName: user.userDTO.lastname,
-          beneficiaryFirstname: user.userDTO.firstname,
+          beneficiaryName: user.lastname,
+          beneficiaryFirstname: user.firstname,
           amount: this.totalPanier,
           paymentType: "Carte bleue"
         };
-        this.beneficiary = user.userDTO.firstname + " " + user.userDTO.lastname;
+        this.beneficiary = user.firstname + " " + user.lastname;
         this.commandeService.envoyerCommande(commande).subscribe(
               (response) => {
                 this.commandeId = response.id;
@@ -88,12 +88,12 @@ export class PaymentComponent {
       this.authService.getCurrentUser().subscribe(
         (user) => {
           const commande = {
-            beneficiaryName: user.userDTO.lastname,
-            beneficiaryFirstname: user.userDTO.firstname,
+            beneficiaryName: user.lastname,
+            beneficiaryFirstname: user.firstname,
             amount: this.totalPanier,
             paymentType: "Chèque"
           };
-          this.beneficiary = user.userDTO.firstname + " " + user.userDTO.lastname;
+          this.beneficiary = user.firstname + " " + user.lastname;
           this.commandeService.envoyerCommande(commande).subscribe(
                 (response) => {
                   this.commandeId = response.id;

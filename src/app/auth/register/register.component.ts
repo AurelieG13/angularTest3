@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { UserAuthDTO } from '../../model/user-auth-dto.model';
 
 @Component({
   selector: 'app-register',
@@ -12,11 +11,10 @@ import { UserAuthDTO } from '../../model/user-auth-dto.model';
 export class RegisterComponent implements OnInit{
   myForm!: FormGroup;
   err!:number;
-  /* formData = {
+  formData = {
     "userDTO": {
       "firstname":'',
       "lastname":'',
-      "phone":'',
       "email":''
     },
     "authDTO": {
@@ -24,8 +22,7 @@ export class RegisterComponent implements OnInit{
       "password":'',
       "authority":''
     }
-  } */
-  formData!:UserAuthDTO;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,7 +45,6 @@ export class RegisterComponent implements OnInit{
       "userDTO": {
         "firstname":this.formData.userDTO.firstname,
         "lastname":this.formData.userDTO.lastname,
-        "phone": this.formData.userDTO.phone,
         "email":this.formData.authDTO.pseudo
       },
       "authDTO": {

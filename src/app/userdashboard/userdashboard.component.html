@@ -13,9 +13,9 @@
                             <div class="card-body">
                                 <h5 class="card-title text-center">Informations personnelles</h5>
                                 <div *ngIf="currentUser">
-                                  <p class="card-text">Nom Prénom : {{ currentUser.userDTO.lastname }} {{ currentUser.userDTO.firstname }}</p>
-                                  <p class="card-text">Téléphone : {{ currentUser.userDTO.phone }}</p>
-                                  <p class="card-text">Email : {{ currentUser.userDTO.email }}</p>
+                                  <p class="card-text">Nom Prénom : {{ currentUser.lastname }} {{ currentUser.firstname }}</p>
+                                  <p class="card-text">Téléphone : {{ currentUser.phone }}</p>
+                                  <p class="card-text">Email : {{ currentUser.email }}</p>
                                 </div>
 
                             </div>

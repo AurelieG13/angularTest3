@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { UserAuthDTO, UserDTO } from '../model/user-auth-dto.model';
+import { UserDTO } from '../model/user-auth-dto.model';
 
 @Component({
   selector: 'app-editprofiluser',
@@ -13,7 +13,7 @@ export class EditprofiluserComponent implements OnInit {
 
   myFormProfil!: FormGroup;
   err!:number;
-  currentUser!: UserAuthDTO;
+  currentUser!: UserDTO;
   editing: boolean = false;
 
   constructor(
@@ -24,8 +24,8 @@ export class EditprofiluserComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe(
-      (userAuthDTO: UserAuthDTO) => {
-        this.currentUser = userAuthDTO;
+      (user: UserDTO) => {
+        this.currentUser = user;
         console.log(this.currentUser);
       },
       error => {
@@ -46,14 +46,14 @@ export class EditprofiluserComponent implements OnInit {
 
   saveChanges(): void {
     if (this.myFormProfil.valid) {
-      this.currentUser.userDTO.firstname = this.myFormProfil.value.firstname;
-      this.currentUser.userDTO.lastname = this.myFormProfil.value.lastname;
-      this.currentUser.userDTO.phone = this.myFormProfil.value.phone;
+      this.currentUser.firstname = this.myFormProfil.value.firstname;
+      this.currentUser.lastname = this.myFormProfil.value.lastname;
+      this.currentUser.phone = this.myFormProfil.value.phone;
 
       console.log('Modifications enregistrées:', this.currentUser);
 
       this.authService.updateUser(this.currentUser).subscribe(
-        (updatedUser: UserAuthDTO) => {
+        (updatedUser: UserDTO) => {
           console.log('Utilisateur mis à jour avec succès:', updatedUser);
           this.editing = false;
         },

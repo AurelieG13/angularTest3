@@ -17,19 +17,19 @@
     <tbody *ngFor="let user of users; let i = index">
         <tr class="text-center">
             <td>
-              <span *ngIf="i !== editingUserIndex">{{ user.userDTO.lastname }}</span>
-              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.userDTO.lastname">
+              <span *ngIf="i !== editingUserIndex">{{ user.lastname }}</span>
+              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.lastname">
             </td>
             <td>
-              <span *ngIf="i !== editingUserIndex">{{ user.userDTO.firstname }}</span>
-              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.userDTO.firstname">
+              <span *ngIf="i !== editingUserIndex">{{ user.firstname }}</span>
+              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.firstname">
             </td>
             <td>
-              <span>{{ user.userDTO.email }}</span>
+              <span>{{ user.email }}</span>
             </td>
             <td>
-              <span *ngIf="i !== editingUserIndex">{{ user.userDTO.phone }}</span>
-              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.userDTO.phone">
+              <span *ngIf="i !== editingUserIndex">{{ user.phone }}</span>
+              <input *ngIf="i === editingUserIndex" type="text" [(ngModel)]="user.phone">
             </td>
             <td>
               <!--button-->
