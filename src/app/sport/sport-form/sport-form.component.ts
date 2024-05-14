@@ -18,7 +18,6 @@ export class SportFormComponent {
   onSubmit() {
     this.sportService.createSport(this.sport).subscribe(
       (response) => {
-        console.log("sport ajouté avec succès");
         this.successMessage = "Le sport a été ajouté avec succès"
         this.resetForm();
         this.router.navigate(['/sportListAdmin']);

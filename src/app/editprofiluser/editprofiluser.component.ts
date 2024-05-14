@@ -26,7 +26,6 @@ export class EditprofiluserComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(
       (user: UserDTO) => {
         this.currentUser = user;
-        console.log(this.currentUser);
       },
       error => {
         console.error('Erreur current user', error);
@@ -50,11 +49,8 @@ export class EditprofiluserComponent implements OnInit {
       this.currentUser.lastname = this.myFormProfil.value.lastname;
       this.currentUser.phone = this.myFormProfil.value.phone;
 
-      console.log('Modifications enregistrées:', this.currentUser);
-
       this.authService.updateUser(this.currentUser).subscribe(
         (updatedUser: UserDTO) => {
-          console.log('Utilisateur mis à jour avec succès:', updatedUser);
           this.editing = false;
         },
         error => {

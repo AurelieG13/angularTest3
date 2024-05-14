@@ -19,7 +19,6 @@ export class SportadminComponent implements OnInit {
     this.sportService.getSports().subscribe(
       (sports: Sport[]) => {
         this.sports = sports;
-        console.log(this.sports);
       },
       error => {
         console.error('Erreur current user', error);
@@ -58,7 +57,6 @@ export class SportadminComponent implements OnInit {
   createSport(sport: Sport) {
     this.sportService.createSport(sport).subscribe(
       response => {
-        console.log(response);
         this.router.navigate(['/sportListAdmin']);
 
       },
@@ -76,7 +74,6 @@ export class SportadminComponent implements OnInit {
         if (index !== -1) {
           // Retirez le sport du tableau
           this.sports.splice(index, 1);
-          console.log('Sport supprimé avec succès');
         } else {
           console.error('Sport non trouvé dans la liste');
         }

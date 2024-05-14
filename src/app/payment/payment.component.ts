@@ -48,8 +48,6 @@ export class PaymentComponent {
     });
     this.totalPanier = this.panierService.calculerTotal();
     this.subtotalPanier = this.panierService.calculateSubtotals();
-    console.log('subtotal pannier :', this.subtotalPanier);
-    console.log('total pannier :', this.totalPanier);
   }
 
   onSubmit() {
@@ -67,7 +65,6 @@ export class PaymentComponent {
               (response) => {
                 this.commandeId = response.id;
                 this.generatePDF(this.commandeId);
-                console.log("commande envoyée avec succès", response);
               },
               (error) => {
                 console.error('Erreur lors de l\'envoi de la commande au backend:', error);
@@ -98,7 +95,6 @@ export class PaymentComponent {
                 (response) => {
                   this.commandeId = response.id;
                   this.generatePDFCheck(this.commandeId);
-                  console.log("commande envoyée avec succès", response);
                 },
                 (error) => {
                   console.error('Erreur lors de l\'envoi de la commande au backend:', error);

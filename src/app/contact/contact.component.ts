@@ -15,11 +15,6 @@ export class ContactComponent {
   constructor(private emailService: EmailService) { }
 
   sendEmail() {
-/*     this.emailService.sendEmail(this.emailRequest)
-      .subscribe(response => {
-        console.log(response);
-      }); */
-      console.log("mail envoyé");
       this.messageDisplayed = true;
 
   }

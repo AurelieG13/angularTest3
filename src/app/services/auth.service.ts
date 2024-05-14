@@ -21,7 +21,7 @@ export class AuthService {
   public roles!: string[];
   public isloggedIn: Boolean = false;
   public loggedUser!: string;
-  userRole!: string;
+  userRole: string[] = [];
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   isLoggedIn: Observable<boolean> = this.isLoggedInSubject.asObservable();
@@ -86,33 +86,38 @@ export class AuthService {
   isAdmin(): Observable<any> {
     if (this.token) {
       const decodeToken = this.jwtHelper.decodeToken(this.token);
-      this.userRole = decodeToken.roles;
-      console.log("service:", this.userRole);
-      return of(this.userRole);
+      const roles = decodeToken.roles || [];
+      const isAdmin = roles.includes('ROLE_ADMIN');
+      return of(isAdmin);
     }
     return throwError('Token absent ou invalide');
   }
 
-/*   getToken():string | null{
-    if (this.isLoggedIn) {
-      console.log("token stocké");
-      return this.token;
-    } */
 
     getToken(): Observable<string | null> {
-      // Vérifiez si l'utilisateur est connecté en vérifiant l'état d'authentification dans votre service AuthService
       return this.isLoggedIn.pipe(
           map(isLoggedIn => {
               if (isLoggedIn) {
-                  // Si l'utilisateur est connecté, retournez le token JWT
                   return this.token;
               } else {
-                  // Si l'utilisateur n'est pas connecté, retournez null ou une chaîne vide selon votre préférence
-                  return null; // ou return '';
+                  return null;
               }
           })
       );
+  }
 
+  private setUserRoles() {
+    if (this.token) {
+      const decodeToken = this.jwtHelper.decodeToken(this.token);
+      this.userRole = decodeToken.roles || [];
+    } else {
+      this.userRole = [];
+    }
+  }
+
+  getUserRoles(): string[] {
+    this.setUserRoles();
+    return this.userRole;
   }
 
 

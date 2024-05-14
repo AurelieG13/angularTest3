@@ -12,10 +12,8 @@ export class tokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Vérifie si l'URL de la requête est dans la liste des routes exclues
-    console.log('intercept ok');
 
     if (this.isExcludedRoute(request.url)) {
-      console.log('intercept is ecludes');
       return next.handle(request); // Passe la requête au gestionnaire HTTP suivant sans modification
     }
 

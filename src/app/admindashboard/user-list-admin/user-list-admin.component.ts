@@ -18,7 +18,6 @@ export class UserListAdminComponent implements OnInit{
     this.authService.getUsers().subscribe(
       (users: UserDTO[]) => {
         this.users = users;
-        console.log(this.users);
       },
       error => {
         console.error('Erreur current user', error);
@@ -27,10 +26,8 @@ export class UserListAdminComponent implements OnInit{
   }
 
   updateUser(user: UserDTO): void {
-    console.log('Mise à jour de l\'utilisateur :', user);
     this.authService.updateUserAdmin(user).subscribe(
       (updatedUser: UserDTO) => {
-        console.log('Utilisateur mis à jour :', updatedUser);
         const index = this.users.findIndex(u => u.id === updatedUser.id);
         if (index !== -1) {
           this.users[index] = updatedUser;

@@ -18,7 +18,6 @@ export class UserdashboardComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(
             (user: UserDTO) => {
               this.currentUser = user;
-              console.log(this.currentUser);
             },
             error => {
               console.error('Erreur current user', error);

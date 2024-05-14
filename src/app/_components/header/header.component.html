@@ -12,12 +12,13 @@
 				<li><a *ngIf="isLoggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
 				<li><a *ngIf="isLoggedIn" class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
 
-        <li><a *ngIf ="isLoggedIn && userRole.includes('ROLE_ADMIN')" class="dropdown-item" routerLink="/admindashboard">Panneau d'administration</a></li>
+        <li><a *ngIf ="isLoggedIn && isAdmin()" class="dropdown-item" routerLink="/admindashboard">Panneau d'administration</a></li>
 
         <li><a type="button" *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/login">Se connecter</a></li>
 				<li><a type="button" *ngIf="!isLoggedIn" class="dropdown-item" routerLink="/register">S'inscrire</a></li>
 			</ul>
 		</div>
+
 
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -33,7 +34,7 @@
 						<ul class="dropdown-menu">
 							<li><a *ngIf="isLoggedIn" class="dropdown-item" routerLink="/userdashboard">Mon compte</a></li>
 							<li><a *ngIf="isLoggedIn" class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
-							<li><a *ngIf ="isLoggedIn && userRole.includes('ROLE_ADMIN')" class="dropdown-item" routerLink="/admindashboard">Panneau d'Administration</a></li>
+							<li><a *ngIf ="isLoggedIn && isAdmin()" class="dropdown-item" routerLink="/admindashboard">Panneau d'Administration</a></li>
 						</ul>
 					</div>
 					<div class="col-2" *ngIf="!isLoggedIn">

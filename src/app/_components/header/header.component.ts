@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  userRole: string = '';
+  userRole: string[] = [];
   token!: string | null;
   role!: string;
   err:number = 0;
@@ -21,10 +21,9 @@ export class HeaderComponent implements OnInit {
     this.authService.isLoggedIn.subscribe((loggedIn: boolean) => {
       if (loggedIn) {
         this.authService.isAdmin().subscribe(
-          (role: string) => {
-            this.userRole = role;
+          (role: string[]) => {
+            this.userRole = this.authService.getUserRoles();
             this.isLoggedIn = loggedIn;
-            console.log("comp:", this.userRole);
           },
           (error: any) => {
             console.error("erreur lors de la récupération du role", error);
@@ -38,6 +37,10 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
+  }
+
+  isAdmin(): boolean {
+    return this.userRole.includes('ROLE_ADMIN');
   }
 
 }

@@ -56,10 +56,7 @@ export class RegisterComponent implements OnInit{
 
     this.authService.register(jsonData).subscribe(
       response => {
-        console.log(response);
-
         this.router.navigate(['/login']);
-
       },
       error => {
         console.error("erreur sur appel api", error);

@@ -76,15 +76,7 @@ export class BookingComponent {
     return this.panierService.calculerTotalPlace();
   }
 
-  //test detail panier
   subtotalArray: { id: number, subtotal: number }[] = [];
-
-/*   calculateSubtotals() {
-    const subtotalMap = this.panierService.getSubtotalMap();
-    this.subtotalArray = Array.from(subtotalMap, ([id, subtotal]) => ({ id, subtotal }));
-    console.log(subtotalMap);
-    console.log(this.subtotalArray);
-  } */
 
   calculateSubtotals() {
     return this.panierService.calculateSubtotals();

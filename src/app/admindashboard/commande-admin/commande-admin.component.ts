@@ -19,7 +19,6 @@ export class CommandeAdminComponent implements OnInit{
     this.commandeService.getCommande().subscribe(
       (commandes: Commande[]) => {
         this.commandes = commandes;
-        console.log(this.commandes);
       },
       error => {
         console.error('Erreur current command', error);
@@ -34,7 +33,6 @@ export class CommandeAdminComponent implements OnInit{
         if (index !== -1) {
           // Retirez le sport du tableau
           this.commandes.splice(index, 1);
-          console.log('commande supprimé avec succès');
         } else {
           console.error('commande non trouvé dans la liste');
         }

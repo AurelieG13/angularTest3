@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   erreur: number = 0;
   err:number = 0;
   message: string | null = null;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -31,7 +32,19 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         const jwtToken = response.body?.token!;
         this.authService.saveToken(jwtToken);
-        this.router.navigate(['/']);
+
+        this.authService.isAdmin().subscribe({
+          next:(isAdmin: boolean) => {
+            if (isAdmin) {
+              this.router.navigate(['/admindashboard']);
+            } else {
+              this.router.navigate(['/']);
+            }
+          },
+          error:(err:any) => {
+            this.err = 1;
+          }
+        });
       },
       error: (err: any) => {
         this.err = 1;
